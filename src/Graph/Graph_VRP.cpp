@@ -43,7 +43,7 @@ void graph_VRP::read_file(istream & fic){
 	else{
 		fic>>nb_nodes;
 	}
- 
+
 	cout<<nb_nodes<<endl;
 
 	V_nodes.resize(nb_nodes);
@@ -54,7 +54,7 @@ void graph_VRP::read_file(istream & fic){
 		fic>>ch;
 
 	//For each node, add it's value, x position and y position
-	for (i=0;i<nb_nodes;i++){
+	for (i=1;i<nb_nodes;i++){
 		fic>>V_nodes[i].num;
 		fic>>V_nodes[i].x;
 		fic>>V_nodes[i].y;
@@ -64,7 +64,7 @@ void graph_VRP::read_file(istream & fic){
 	while ((strcmp(ch,"DEMAND_SECTION")))
 		fic>>ch;
 	//For each node, add it's demand value
-	
+
 	int temp;
 	for (i=0;i<nb_nodes;i++){
 		fic>>temp;
@@ -89,7 +89,7 @@ void graph_VRP::read_file(istream & fic){
 	}
 	directed=false;
 	construct_Undirected_Lemon_Graph();
- 
+
 }
 
 float graph_VRP::distance(int i, int j){
