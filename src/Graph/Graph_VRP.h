@@ -9,7 +9,9 @@ using namespace std;
 
 class link_VRP{
 public:
+	//id of the link
 	int num;
+	//nodes of the link
 	int v1, v2;
 	float length;
 	int return_other_extrem(int v);
@@ -22,6 +24,7 @@ public:
 	float demand;
 	float x, y;
 
+	//links from this node
 	list<link_VRP*> L_links;
 
 	bool test_neighbour(int j);
