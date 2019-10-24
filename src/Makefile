@@ -62,16 +62,19 @@ CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR) -I$(LEMONINCDIR)
 all: Heuristic_VRP
 
 Graph.o: Graph/Graph_VRP.cpp Graph/Graph_VRP.h
-	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) -c Graph/Graph_VRP.cpp -o Graph/Graph_VRP.o
+	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) -c Graph/Graph_VRP.cpp -o bin/Graph_VRP.o
 
 Route.o: Route/Route_VRP.cpp Route/Route_VRP.h
-	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) -c Route/Route_VRP.cpp -o Route/Route_VRP.o 
+	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) -c Route/Route_VRP.cpp -o bin/Route_VRP.o 
 
 Heuristic_VRP.o: Heuristic_VRP.cpp
-	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) Heuristic_VRP.cpp
+	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) Heuristic_VRP.cpp -o bin/Heuristic_VRP.o
+
+Greedy.o: Algo/Greedy.cpp
+	$(CCC) -c $(CCFLAGS) $(CCLNDIRS) Algo/Greedy.cpp -o bin/Greedy.o
 
 Heuristic_VRP: Heuristic_VRP.o Graph.o Route.o
-	$(CCC) $(CCFLAGS) $(CCLNDIRS) Heuristic_VRP.o Graph/Graph_VRP.o Route/Route_VRP.o -o Heuristic_VRP $(CCLNFLAGS)
+	$(CCC) $(CCFLAGS) $(CCLNDIRS) bin/Heuristic_VRP.o bin/Graph_VRP.o bin/Route_VRP.o -o Heuristic_VRP $(CCLNFLAGS)
 
 clean:
 	rm -f *.o Heuristic_VRP
