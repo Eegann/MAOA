@@ -6,7 +6,7 @@ bool sort_link(const link_VRP* link1, const link_VRP* link2){
 }
 
 
-void greedyAlgorithm(graph_VRP* G, int nb_vehicules, int capacity){
+void greedyAlgorithm(graph_VRP* G, vector<route_VRP> routes, int nb_vehicules, int capacity){
 
 
 	int i=0, solLength=0;
@@ -24,8 +24,6 @@ void greedyAlgorithm(graph_VRP* G, int nb_vehicules, int capacity){
 
         //Routes for vehicules
 
-        vector<route_VRP> routes;
-
         for( i=0; i<nb_vehicules; i++){
                 route_VRP R(G);
                 R.addNode(&G->V_nodes[0]);
@@ -37,7 +35,7 @@ void greedyAlgorithm(graph_VRP* G, int nb_vehicules, int capacity){
                 int best = -1;
                 for( i = 0; i<nb_vehicules; i++){
                         if(routes.at(i).totalDemand() + G->V_nodes[(*it)->return_other_extrem(0)].demand <= capacity){
-                                int tempDist = G->distance((*it)->return_other_extrem(0),(*(--routes.at(0).nodes.end()))->num);
+                                int tempDist = G->distance((*it)->return_other_extrem(0),(*(--routes.at(i).nodes.end()))->num);
                                 if( tempDist < bestDist){
                                         bestDist = tempDist;
                                         best = i;

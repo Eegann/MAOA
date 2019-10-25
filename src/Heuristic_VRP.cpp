@@ -37,6 +37,9 @@ int main(int argc, char**argv){
 	fic.close();
 
 	cout << "End reading" << endl;
-	greedyAlgorithm(&G, nb_vehicules, capacity);
+
+	vector<route_VRP> routes;
+
+	greedyAlgorithm(&G, routes, nb_vehicules, capacity);
 
 }

@@ -1,5 +1,5 @@
 #include "Graph_VRP.h"
-#include<cstring>
+#include <cstring>
 #include <lemon/lgf_writer.h>
 #include <math.h>
 
@@ -44,25 +44,27 @@ void graph_VRP::read_file(istream & fic){
 		fic>>nb_nodes;
 	}
 
-	cout<<nb_nodes<<endl;
-
 	V_nodes.resize(nb_nodes);
 
 	//Read the file until "NODE_COORD_SECTION"
 	fic>>ch;
-	while ((strcmp(ch,"NODE_COORD_SECTION")))
+	while ((strcmp(ch,"NODE_COORD_SECTION"))){
 		fic>>ch;
+	}
 
 	//For each node, add it's value, x position and y position
-	for (i=1;i<nb_nodes;i++){
+	for (i=0;i<nb_nodes;i++){
 		fic>>V_nodes[i].num;
 		fic>>V_nodes[i].x;
 		fic>>V_nodes[i].y;
+		V_nodes[i].num-=1;
+		cout << V_nodes[i].num << endl;
 	}
 
 	//Read the file until "DEMAND_SECTION"
 	while ((strcmp(ch,"DEMAND_SECTION")))
 		fic>>ch;
+
 	//For each node, add it's demand value
 
 	int temp;
@@ -72,7 +74,7 @@ void graph_VRP::read_file(istream & fic){
 	}
 	nb_links = (nb_nodes*(nb_nodes-1))/2;
 	V_links.resize(nb_links);
-	cout << V_links.size() << endl;
+
 	k=0;
 	for (i=0;i<nb_nodes;i++){
 		for (j=i+1;j<nb_nodes;j++){
@@ -94,7 +96,7 @@ void graph_VRP::read_file(istream & fic){
 
 float graph_VRP::distance(int i, int j){
 	//Pythagor formula
-	return sqrt(pow(V_nodes[i].x-V_nodes[j].x,2)+pow(V_nodes[i].y-V_nodes[j].y,2));
+	return sqrt( pow(V_nodes[i].x-V_nodes[j].x,2)+pow(V_nodes[i].y-V_nodes[j].y,2) );
 }
 
 /******************* LEMON ******************/
