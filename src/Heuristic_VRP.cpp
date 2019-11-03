@@ -9,7 +9,25 @@
 #include "Graph/Graph_VRP.h"
 #include "Route/Route_VRP.h"
 #include "Algo/Greedy.cpp"
+#include "Algo/LocalSearch.cpp"
 using namespace std;
+
+
+void printResult(vector<route_VRP>* routes){
+
+	int i;
+	float solLength = 0;
+	for( i = 0; i< routes->size(); i++){
+		cout << "Route " << i+1 << " : ";
+		for(list<node_VRP*>::iterator it=routes->at(i).nodes.begin(); it != routes->at(i).nodes.end(); it++){
+			cout << (*it)->num << " " ;
+		}
+		cout << endl;
+		cout << "Length: " << routes->at(i).totalLength() << " Demand: " << routes->at(i).totalDemand() << endl;
+		solLength+=routes->at(i).totalLength();
+	}
+	cout << "Longueur total: " << solLength << endl;
+}
 
 int main(int argc, char**argv){
 
@@ -36,10 +54,17 @@ int main(int argc, char**argv){
 
 	fic.close();
 
-	cout << "End reading" << endl;
+	cout << "\n\tEnd reading\n" << endl;
 
 	vector<route_VRP> routes;
 
-	greedyAlgorithm(&G, routes, nb_vehicules, capacity);
+	cout << "\n\tBegin greedy algorithm\n" << endl;
 
+	greedyAlgorithm(&G, &routes, nb_vehicules, capacity);
+	printResult(&routes);
+
+	cout << "\n\tBegin local search\n" << endl;
+
+	localSearch(&G, &routes, nb_vehicules, capacity);
+	printResult(&routes);
 }
