@@ -99,6 +99,52 @@ float graph_VRP::distance(int i, int j){
 	return sqrt( pow(V_nodes[i].x-V_nodes[j].x,2)+pow(V_nodes[i].y-V_nodes[j].y,2) );
 }
 
+void graph_VRP::toPDF(string filename, vector<vector< int > > x, bool triang){
+	int i,j;
+
+	ostringstream FileName; 
+	FileName.str("");
+	FileName <<filename.c_str() << "_G.dot";
+
+	ofstream fic(FileName.str().c_str());
+	fic << "Graph G{" << endl;
+
+	for(i=0; i<V_nodes.size(); i++){
+		if(V_nodes[i].num == 0)
+			fic<<"  "<<V_nodes[i].num<<"[shape = box style = filled, fillcolor = lightblue]"<<endl;
+		else
+			fic<<"  "<<V_nodes[i].num<<"[shape = octagon]"<<endl;
+	}
+
+	for(i=0; i<x.size(); i++){
+		for(j=0; j<x[i].size(); j++){
+			
+			if(triang){
+				if(x[i][j]==1)
+					fic<<"  \""<<i<<"\"--\""<<i+j+1<<"\";"<<endl;
+				if(x[i][j]==2){
+					fic<<"  \""<<i<<"\"--\""<<i+j+1<<"\";"<<endl;
+					fic<<"  \""<<i<<"\"--\""<<i+j+1<<"\";"<<endl;
+				}
+			}
+			else
+				if(x[i][j]==1)
+					fic<<"  \""<<i<<"\"--\""<<j<<"\";"<<endl;
+		}
+	}
+  
+	fic<<"}"<<endl;
+
+  
+
+	fic.close();
+
+	ostringstream commande; 
+	commande.str("");
+	commande<<GRAPHVIZ<<"dot -Tpdf -o "<<filename.c_str() << "_G.pdf "<< FileName.str().c_str()<<endl;
+	cout<<commande.str().c_str();
+	if(system(commande.str().c_str())){cout<<"PDF generated successfully"<<endl;}
+}
 /******************* LEMON ******************/
 
 void graph_VRP::construct_Undirected_Lemon_Graph(){

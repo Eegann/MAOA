@@ -1,0 +1,41 @@
+Graph G{
+  0[shape = box style = filled, fillcolor = lightblue]
+  1[shape = octagon]
+  2[shape = octagon]
+  3[shape = octagon]
+  4[shape = octagon]
+  5[shape = octagon]
+  6[shape = octagon]
+  7[shape = octagon]
+  8[shape = octagon]
+  9[shape = octagon]
+  10[shape = octagon]
+  11[shape = octagon]
+  12[shape = octagon]
+  13[shape = octagon]
+  14[shape = octagon]
+  15[shape = octagon]
+  "0"--"1";
+  "0"--"1";
+  "0"--"2";
+  "0"--"2";
+  "0"--"3";
+  "0"--"4";
+  "0"--"5";
+  "0"--"6";
+  "0"--"6";
+  "0"--"7";
+  "0"--"8";
+  "0"--"10";
+  "0"--"11";
+  "0"--"13";
+  "0"--"14";
+  "0"--"15";
+  "3"--"9";
+  "4"--"11";
+  "5"--"9";
+  "7"--"14";
+  "8"--"13";
+  "10"--"12";
+  "12"--"15";
+}

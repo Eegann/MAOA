@@ -55,6 +55,7 @@ public:
 	void construct_Directed_Lemon_Graph();
 	void read_file(istream & fic);
 	float distance(int i, int j);
+	void toPDF(string filename, vector<vector< int > > x, bool triang);
 
 };
 #endif

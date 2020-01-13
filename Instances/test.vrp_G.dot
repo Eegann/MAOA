@@ -1,0 +1,13 @@
+Graph G{
+  0[shape = octagon style = filled, fillcolor = lightblue]
+  1[shape = octagon]
+  2[shape = octagon]
+  3[shape = octagon]
+  4[shape = octagon]
+  "0"--"2";
+  "0"--"3";
+  "1"--"0";
+  "2"--"4";
+  "3"--"1";
+  "4"--"0";
+}
